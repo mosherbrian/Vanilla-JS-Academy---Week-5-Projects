@@ -114,9 +114,9 @@
       shuffle(monsters);
 
       let mainDiv = document.querySelector('#app');
-      mainDiv.innerHTML += '<div class="row">';
+      let divText = '<div class="row">';
       for (monster of monsters) {
-        mainDiv.innerHTML += `
+        divText += `
           <div class="grid">
           <figure>
           <img
@@ -125,9 +125,11 @@
           >
           <figcaption>${monster['name']}</figcaption>
           </figure>
-          </div>`;
+          </div>
+          `;
       }
-      mainDiv.innerHTML += '</div>';
+      divText += '</div>';
+      mainDiv.innerHTML = divText;
     </script>
   </body>
 </html>
