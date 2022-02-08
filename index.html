@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Monsters!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style type="text/css">
+      body {
+        margin: 0 auto;
+        max-width: 40em;
+        width: 88%;
+      }
+
+      /**
+			 * A simple grid layout
+			 */
+      .row {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        text-align: center;
+      }
+
+      .grid {
+        min-height: 6em;
+        padding: 1em;
+      }
+
+      /**
+			 * Make sure images scale
+			 */
+      img {
+        height: auto;
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Monsters!</h1>
+
+    <div id="app"></div>
+
+    <footer>
+      <hr />
+      <p class="text-small text-muted">
+        Icons by
+        <a href="https://thenounproject.com/term/door/311732/"
+          >Jamie Dickinson</a
+        >,
+        <a href="https://thenounproject.com/term/monster/184225/"
+          >Nicky Knicky</a
+        >,
+        <a href="https://thenounproject.com/term/monster/1510400/"
+          >Alvaro Cabrera</a
+        >,
+        <a href="https://thenounproject.com/term/monster/28460/">Eliricon</a>,
+        <a href="https://thenounproject.com/term/monster/82823/">April Yang</a>,
+        <a href="https://thenounproject.com/term/monster/1062009/">tk66</a>,
+        <a href="https://thenounproject.com/term/monster/24990/">Alex WaZa</a>,
+        <a href="https://thenounproject.com/term/monster/37212/">Husein Aziz</a
+        >,
+        <a href="https://thenounproject.com/term/monster/2236082">iconcheese</a
+        >, and
+        <a href="https://thenounproject.com/term/socks/38451/">Yazmin Alanis</a
+        >.
+      </p>
+    </footer>
+
+    <script>
+      /**
+       * Randomly shuffle an array
+       * https://stackoverflow.com/a/2450976/1293256
+       * @param	{Array} array The array to shuffle
+       * @return {String}			The first item in the shuffled array
+       */
+      function shuffle(array) {
+        let currentIndex = array.length;
+        let temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+
+          // And swap it with the current element.
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+
+        return array;
+      }
+
+      // The monsters and socks
+      let monsters = [
+        { name: 'monster1', altText: 'An orange elephant-like monster' },
+        { name: 'monster2', altText: 'An orange bug-like monster' },
+        { name: 'monster3', altText: 'A green alligator-like monster' },
+        { name: 'monster4', altText: 'A tall red four-armed monster' },
+        { name: 'monster5', altText: 'A green alien monster' },
+        { name: 'monster6', altText: 'A green triangle monster' },
+        { name: 'monster7', altText: 'A purple tentacle monster' },
+        { name: 'monster8', altText: 'A purple egg-shaped monster' },
+        { name: 'monster9', altText: 'A blue flying bug monster' },
+        {
+          name: 'monster10',
+          altText: 'A blue monster with eye balls on stalks above its head',
+        },
+        { name: 'monster11', altText: 'A grey ape-like monster' },
+        { name: 'sock', altText: 'A pair of socks' },
+      ];
+
+      shuffle(monsters);
+
+      let mainDiv = document.querySelector('#app');
+      mainDiv.innerHTML += '<div class="row">';
+      for (monster of monsters) {
+        mainDiv.innerHTML += `
+          <div class="grid">
+          <figure>
+          <img
+            alt="${monster['altText']}" 
+            src="/${monster['name']}.svg"
+          >
+          <figcaption>${monster['name']}</figcaption>
+          </figure>
+          </div>`;
+      }
+      mainDiv.innerHTML += '</div>';
+    </script>
+  </body>
+</html>
