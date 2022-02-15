@@ -139,8 +139,8 @@
           let replaceText = target.innerHTML.replace(/door/, monster);
           let replacement = document.createElement('button');
           replacement.innerHTML = replaceText;
+          replacement.disabled = true;
           target.replaceWith(replacement);
-          target.disabled = true;
         }
       });
     </script>
