@@ -132,6 +132,8 @@
       }
       divText += '</div>';
       mainDiv.innerHTML = divText;
+      let numRevealed = 0;
+      let h1 = document.querySelector('h1');
       document.addEventListener('click', function (event) {
         let target = event.target.closest('[data-monster]');
         if (target) {
@@ -141,6 +143,12 @@
           replacement.innerHTML = replaceText;
           replacement.disabled = true;
           target.replaceWith(replacement);
+          numRevealed++;
+          if (monster !== 'sock') {
+            if (numRevealed === monsters.length - 1) {
+              h1.textContent += 'You win!';
+            }
+          } else h1.textContent += 'Sorry! You lost.';
         }
       });
     </script>
