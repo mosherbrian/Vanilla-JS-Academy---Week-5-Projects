@@ -117,13 +117,12 @@
       let divText = '<div class="row">';
       for (monster of monsters) {
         monster.doorhtml = `
-          <figure data-monster="${monster['name']}">
+          <button data-monster="${monster['name']}">
             <img
               alt="${monster['altText']}" 
               src="door.svg"
             >
-            <figcaption>${monster['name']}</figcaption>
-            </figure>
+            </button>
             `;
         divText += `
           <div class="grid">
@@ -138,7 +137,7 @@
         if (target) {
           let monster = target.getAttribute('data-monster');
           let replaceText = target.innerHTML.replace(/door/, monster);
-          let replacement = document.createElement('figure');
+          let replacement = document.createElement('button');
           replacement.innerHTML = replaceText;
           target.replaceWith(replacement);
         }
