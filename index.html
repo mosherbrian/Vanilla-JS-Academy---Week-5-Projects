@@ -116,15 +116,18 @@
       let mainDiv = document.querySelector('#app');
       let divText = '<div class="row">';
       for (monster of monsters) {
+        monster.doorhtml = `
+          <figure data-monster="${monster['name']}">
+            <img
+              alt="${monster['altText']}" 
+              src="door.svg"
+            >
+            <figcaption>${monster['name']}</figcaption>
+            </figure>
+            `;
         divText += `
           <div class="grid">
-          <figure data-monster="${monster['name']}">
-          <img
-            alt="${monster['altText']}" 
-            src="door.svg"
-          >
-          <figcaption>${monster['name']}</figcaption>
-          </figure>
+          ${monster.doorhtml}
           </div>
           `;
       }
@@ -133,7 +136,11 @@
       document.addEventListener('click', function (event) {
         let target = event.target.closest('[data-monster]');
         if (target) {
-          console.log(target);
+          let monster = target.getAttribute('data-monster');
+          let replaceText = target.innerHTML.replace(/door/, monster);
+          let replacement = document.createElement('figure');
+          replacement.innerHTML = replaceText;
+          target.replaceWith(replacement);
         }
       });
     </script>
