@@ -115,36 +115,34 @@
 
       let mainDiv = document.querySelector('#app');
       let divText = '<div class="row">';
-      for (monster of monsters) {
-        monster.doorhtml = `
-          <button data-monster="${monster['name']}">
+      for (let index = 0; index < monsters.length; index++) {
+        divText += `
+          <div class="grid">
+          <button data-monster="${index}">
             <img
-              alt="${monster['altText']}" 
+              alt="Door ${index}" 
               src="door.svg"
             >
             </button>
-            `;
-        divText += `
-          <div class="grid">
-          ${monster.doorhtml}
           </div>
           `;
       }
       divText += '</div>';
-      mainDiv.innerHTML = divText;
+      mainDiv.innerHTML =
+        '<p>To play click each door to reveal all the monsters before you reveal the sock.</p>' +
+        divText;
       let numRevealed = 0;
       let h1 = document.querySelector('h1');
       document.addEventListener('click', function (event) {
         let target = event.target.closest('[data-monster]');
         if (target) {
           let monster = target.getAttribute('data-monster');
-          let replaceText = target.innerHTML.replace(/door/, monster);
-          let replacement = document.createElement('button');
-          replacement.innerHTML = replaceText;
-          replacement.disabled = true;
+          let replacement = document.createElement('img');
+          replacement.src = `${monsters[monster].name}.svg`;
+          replacement.alt = monsters[monster].name;
           target.replaceWith(replacement);
           numRevealed++;
-          if (monster !== 'sock') {
+          if (monsters[monster].name !== 'sock') {
             if (numRevealed === monsters.length - 1) {
               h1.textContent += 'You win!';
             }
