@@ -125,19 +125,24 @@
           <div class="grid" aria-live="polite">
           <button data-monster="${index}">
             <img
-              alt="Door ${index}" 
+              alt="Door ${index + 1}"
               src="door.svg"
             >
             </button>
           </div>
           `;
       }
-      divText += '</div>';
+      divText += `
+        <form action="" id="replay" hidden="true" aria-live="polite">
+          <button type="submit">Replay</button>
+        </form>
+        </div>`;
       mainDiv.innerHTML =
         '<p>To play click each door to reveal all the monsters before you reveal the sock.</p>' +
         divText;
       let numRevealed = 0;
       let h1 = document.querySelector('h1');
+      let formReplay = document.querySelector('#replay');
       document.addEventListener('click', function (event) {
         let target = event.target.closest('[data-monster]');
         if (target) {
@@ -150,8 +155,12 @@
           if (monsters[monster].name !== 'sock') {
             if (numRevealed === monsters.length - 1) {
               h1.textContent += 'You win!';
+              formReplay.hidden = false;
             }
-          } else h1.textContent += 'Sorry! You lost.';
+          } else {
+            h1.textContent += 'Sorry! You lost.';
+            formReplay.hidden = false;
+          }
         }
       });
     </script>
